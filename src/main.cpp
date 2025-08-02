@@ -6,7 +6,7 @@
 /*   By: joscastr <joscastr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 17:26:58 by joscastr          #+#    #+#             */
-/*   Updated: 2025/08/02 00:38:13 by joscastr         ###   ########.fr       */
+/*   Updated: 2025/08/02 22:56:05 by joscastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,17 @@ int main(){
 			for (size_t j = 0; j < servers[i].serverNames.size(); ++j)
 				std::cout << servers[i].serverNames[j] << " ";
 			std::cout << std::endl;
-
-			}	
+			
+			std::cout << "Server #" << "root: " << servers[i].root << std::endl;
+			for (size_t k = 0; k < servers[i].root.size(); k++)
+				std::cout << servers[i].root[k] << " ";
+			std::cout << std::endl;
+			
+			std::cout << "Server #" << "index: " << servers[i].index << std::endl;
+			for(size_t l = 0; l < servers[i].index.size(); l++)
+				std::cout << servers[i].index[l] << " ";
+			std::cout << std::endl;
+		}	
 			
 		
 		std::cout << "Config OK. Servidores encontrados: " // ✅ Muestra un mensaje de éxito y cuántos bloques server fueron parseados correctamente.

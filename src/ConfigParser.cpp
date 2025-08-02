@@ -83,6 +83,20 @@ void ConfigParser::splitServerBlocks() {
 					server.addServerName(value);
 				}
 			}
+			else if (directive == "root") {
+				std::string value;
+				lineStream >> value;
+				if (!value.empty() && value.back() == ';')
+					value.pop_back();
+				server.index = value;
+			}
+			else if (directive == "index") {
+				std::string value;
+				lineStream >> value;
+				if(!value.empty() && value.back() == ';' )
+					value.pop_back();
+				server.index = value;
+			}
 			
 
 			// Aquí luego vendrán otros if para otras directivas
