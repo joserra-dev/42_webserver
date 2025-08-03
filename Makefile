@@ -6,13 +6,13 @@
 #    By: joscastr <joscastr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/02 00:00:00 by joscastr          #+#    #+#              #
-#    Updated: 2025/08/02 22:55:13 by joscastr         ###   ########.fr        #
+#    Updated: 2025/08/03 21:37:14 by joscastr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        := webserv
 CXX         := c++
-CXXFLAGS    := -Wall -Wextra -Werror -std=c++98
+CXXFLAGS    := -Wall -Wextra -Werror -std=c++98 -Iinclude
 RM          := rm -f
 
 SRC_DIR     := src
