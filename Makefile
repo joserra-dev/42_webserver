@@ -6,7 +6,7 @@
 #    By: joscastr <joscastr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/02 00:00:00 by joscastr          #+#    #+#              #
-#    Updated: 2025/08/03 21:37:14 by joscastr         ###   ########.fr        #
+#    Updated: 2025/08/03 22:44:00 by joscastr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ INC_DIR     := include
 SRC_FILES   := main.cpp \
                ConfigParser.cpp \
                ServerConfig.cpp \
-               LocationConfig.cpp
+               LocationConfig.cpp\
+			   Server.cpp
 
 SRCS        := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS        := $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
