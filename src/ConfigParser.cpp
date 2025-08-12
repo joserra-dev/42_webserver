@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ConfigParser.cpp                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joserra <joserra@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/09 01:35:13 by joserra           #+#    #+#             */
+/*   Updated: 2025/08/09 01:35:16 by joserra          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ConfigParser.hpp"         // Incluye el header de la clase ConfigParser
 #include <fstream>                  // Para trabajar con archivos (ifstream)
 #include <sstream>                  // Para manejar buffers de texto
@@ -70,31 +82,35 @@ void ConfigParser::splitServerBlocks() {
 			if (directive == "listen") {                   // Si la directiva es listen
 				std::string value;
 				while (lineStream >> value) {              // Leer todos los valores siguientes
-					if (value.back() == ';')               // Quitar punto y coma si está al final
-						value.pop_back();
+					if (!value.empty() && value[value.size() - 1] == ';')
+    value.erase(value.size() - 1);
+
 					server.addListen(value);               // Guardar valor en el objeto server
 				}
 			}
 			else if (directive == "server_name") {
 				std::string value;
 				while (lineStream >> value) {
-					if (value.back() == ';')
-						value.pop_back();
+					if (!value.empty() && value[value.size() - 1] == ';')
+    value.erase(value.size() - 1);
+
 					server.addServerName(value);
 				}
 			}
 			else if (directive == "root") {
 				std::string value;
 				lineStream >> value;
-				if (!value.empty() && value.back() == ';')
-					value.pop_back();
+				if (!value.empty() && value[value.size() - 1] == ';')
+    value.erase(value.size() - 1);
+
 				server.index = value;
 			}
 			else if (directive == "index") {
 				std::string value;
 				lineStream >> value;
-				if(!value.empty() && value.back() == ';' )
-					value.pop_back();
+				if (!value.empty() && value[value.size() - 1] == ';')
+    value.erase(value.size() - 1);
+
 				server.index = value;
 			}
 			

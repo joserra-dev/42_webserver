@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Server.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joserra <joserra@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/09 01:35:42 by joserra           #+#    #+#             */
+/*   Updated: 2025/08/09 01:35:44 by joserra          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Server.hpp"
 #include <iostream>
 #include <cstring>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <cstdio>
+
 
 std::map<std::string, int> Server::_globalSocketMap;  // Definición
 

@@ -1,8 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joserra <joserra@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/09 01:35:32 by joserra           #+#    #+#             */
+/*   Updated: 2025/08/09 01:35:35 by joserra          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ConfigParser.hpp"
 #include "Server.hpp"
+#include "Listener.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <poll.h>
+#include <unistd.h>
+#include <sys/socket.h>
 
 int main() {
 	try {
@@ -31,8 +47,13 @@ int main() {
 		}
 
 		std::cout << "Sockets inicializados correctamente. Servidores activos: "
-		          << servers.size() << std::endl;
+			      << servers.size() << std::endl;
 
+		// Ejecutar loop de eventos con Listener
+		Listener listener(servers);
+		listener.run();
+
+		// Liberar memoria
 		for (size_t i = 0; i < servers.size(); ++i) {
 			delete servers[i];
 		}
@@ -40,5 +61,6 @@ int main() {
 		std::cerr << "Error: " << e.what() << std::endl;
 		return 1;
 	}
+
 	return 0;
 }
