@@ -6,7 +6,7 @@
 /*   By: joserra <joserra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 01:34:50 by joserra           #+#    #+#             */
-/*   Updated: 2025/08/09 01:34:55 by joserra          ###   ########.fr       */
+/*   Updated: 2025/08/12 23:50:00 by joserra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ void Listener::handleNewConnection(int fd) {
 
 	std::cout << "🆕 Nueva conexión aceptada: FD = " << clientFd << std::endl;
 
-	// Más adelante, pasar este FD a una clase Connection para gestionarlo
+	// Más adelante, pasar este FD a una clase Connection para gestionarlo o
 }

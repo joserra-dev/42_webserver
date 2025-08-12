@@ -6,7 +6,7 @@
 /*   By: joserra <joserra@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 01:36:58 by joserra           #+#    #+#             */
-/*   Updated: 2025/08/09 01:37:01 by joserra          ###   ########.fr       */
+/*   Updated: 2025/08/12 23:50:16 by joserra          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Listener {
 		std::vector<Server*> _servers;
 
 		void setupPollFDs();					//Inincializa pollfd con los sockets de escucha
-		void handleNewConnection(int fd); 	// MAneja nuevas conexiones entrantes
+		void handleNewConnection(int fd); 	// Maneja nuevas conexiones entrantes
 };
 
 #endif
