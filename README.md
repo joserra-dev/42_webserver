@@ -355,4 +355,8 @@ LEARN BEFOREHAND:
 					-Load server configs 
 					-Create/bind/listen sockets for each (IP, port) 
 					-Add server sockets to the pollfd list 
+<<<<<<< HEAD
 					-In the main loop: Accept new clients if a listening socket is ready, read/write from client
+=======
+					-In the main loop: Accept new clients if a listening socket is ready, read/write from client
+>>>>>>> 97f580970352937cda012e33c4fe0d79b23573fb

@@ -1,0 +1,41 @@
+[33mcommit bf56d5819336bb404df29e8747db08feac368ddf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: joserra-dev <devjoserra@gmail.com>
+Date:   Tue Aug 12 23:53:39 2025 +0200
+
+    manejamos Server y listener
+
+[33mcommit 54795064f2838eb664c09a2d11b95a9d0c709909[m
+Author: joserra-dev <devjoserra@gmail.com>
+Date:   Tue Aug 12 22:52:19 2025 +0200
+
+    modificado el server añadimos listener
+
+[33mcommit f6151a26f3f044b231d2053e670607e19409780c[m
+Author: Jose Ramon <devjoserra@gmail.com>
+Date:   Mon Aug 4 01:13:43 2025 +0200
+
+    depuracion de server y main
+
+[33mcommit 1b071e7efd514ccb7f5b76ccd208aa7438c1e50f[m
+Author: Jose Ramon <devjoserra@gmail.com>
+Date:   Sun Aug 3 22:41:11 2025 +0200
+
+    hemos implementado y comentado server.cpp/hpp
+
+[33mcommit 6f34085299da8f696ab6a000cf9c55e500c6c3eb[m
+Author: Jose Ramon <devjoserra@gmail.com>
+Date:   Sat Aug 2 23:18:04 2025 +0200
+
+    actualizamos estructura y empezamos con server
+
+[33mcommit 4eab559baa6ecacc4b2b30b38a85522cd313692a[m
+Author: Jose Ramon <devjoserra@gmail.com>
+Date:   Sat Aug 2 00:53:24 2025 +0200
+
+    ya tenemos nuestros primera parte del proyecto funcionando
+
+[33mcommit caeb25045fec896f5860f6ca42ad62115a42fb96[m
+Author: Jose Ramon <devjoserra@gmail.com>
+Date:   Sat Aug 2 00:50:13 2025 +0200
+
+    first commit
