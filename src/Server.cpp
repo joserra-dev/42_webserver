@@ -17,6 +17,9 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdio>
+#include <cerrno>
+#include <fcntl.h>   // ✅ fcntl(), F_GETFL, F_SETFL, O_NONBLOCK
+
 
 
 std::map<std::string, int> Server::_globalSocketMap;  // Definición
@@ -54,6 +57,12 @@ int Server::createSocket(const std::string& ipPort) {
 		port = std::atoi(ipPort.c_str());
 	}
 
+	// Validar puerto
+	if (port <= 0 || port > 65535) {
+		std::cerr << "Error: Puerto inválido: " << port << std::endl;
+		return -1;
+	}
+
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0) {
 		perror("socket");
@@ -61,13 +70,23 @@ int Server::createSocket(const std::string& ipPort) {
 	}
 
 	int opt = 1;
-	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+		perror("setsockopt");
+
+	// 🔹 Hacer socket no bloqueante
+	int flags = fcntl(sockfd, F_GETFL, 0);
+	fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
 
 	sockaddr_in addr;
 	std::memset(&addr, 0, sizeof(addr));
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(port);
-	inet_pton(AF_INET, ip.c_str(), &(addr.sin_addr));
+
+	if (inet_pton(AF_INET, ip.c_str(), &(addr.sin_addr)) <= 0) {
+		std::cerr << "Error: dirección IP inválida: " << ip << std::endl;
+		close(sockfd);
+		return -1;
+	}
 
 	if (bind(sockfd, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
 		perror("bind");
@@ -81,6 +100,7 @@ int Server::createSocket(const std::string& ipPort) {
 		return -1;
 	}
 
+	std::cout << "✅ Escuchando en " << ip << ":" << port << " (FD: " << sockfd << ")\n";
 	return sockfd;
 }
 

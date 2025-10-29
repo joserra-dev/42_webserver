@@ -79,20 +79,24 @@ void Listener::run() {
                     } else {
                         buffer[bytes] = '\0';
                         std::cout << "💬 Mensaje de cliente: " << buffer << "\n";
+                        
+                        // Respuesta HTTP mínima
+                        std::string response = "HTTP/1.1 200 OK\r\n"
+                                               "Content-Type: text/plain\r\n"
+                                               "Content-Length: 13\r\n"
+                                               "\r\n"
+                                               "Hola, mundo!";
+                        int sent = send(_pollfds[i].fd, response.c_str(), response.size(), 0);
+                        if (sent < 0) {
+                            perror("send");
+                        }
+
+                        // Cerramos la conexión después de responder
+                        close(_pollfds[i].fd);
+                        _pollfds.erase(_pollfds.begin() + i);
+                        i--;
                     }
                 }
-				// Respuesta HTTP mínima
-		std::string response = "HTTP/1.1 200 OK\r\n"
-                       "Content-Type: text/plain\r\n"
-                       "Content-Length: 13\r\n"
-                       "\r\n"
-                       "Hola, mundo!";
-		send(_pollfds[i].fd, response.c_str(), response.size(), 0);
-
-		// Cerramos la conexión después de responder
-		close(_pollfds[i].fd);
-		_pollfds.erase(_pollfds.begin() + i);
-		i--;
 					}
         }
     }

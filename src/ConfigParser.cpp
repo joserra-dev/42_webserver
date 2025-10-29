@@ -83,7 +83,7 @@ void ConfigParser::splitServerBlocks() {
 				std::string value;
 				while (lineStream >> value) {              // Leer todos los valores siguientes
 					if (!value.empty() && value[value.size() - 1] == ';')
-    value.erase(value.size() - 1);
+						value.erase(value.size() - 1);
 
 					server.addListen(value);               // Guardar valor en el objeto server
 				}
@@ -92,7 +92,7 @@ void ConfigParser::splitServerBlocks() {
 				std::string value;
 				while (lineStream >> value) {
 					if (!value.empty() && value[value.size() - 1] == ';')
-    value.erase(value.size() - 1);
+						value.erase(value.size() - 1);
 
 					server.addServerName(value);
 				}
@@ -101,7 +101,7 @@ void ConfigParser::splitServerBlocks() {
 				std::string value;
 				lineStream >> value;
 				if (!value.empty() && value[value.size() - 1] == ';')
-    value.erase(value.size() - 1);
+					value.erase(value.size() - 1);
 
 				server.index = value;
 			}
@@ -109,7 +109,7 @@ void ConfigParser::splitServerBlocks() {
 				std::string value;
 				lineStream >> value;
 				if (!value.empty() && value[value.size() - 1] == ';')
-    value.erase(value.size() - 1);
+					value.erase(value.size() - 1);
 
 				server.index = value;
 			}

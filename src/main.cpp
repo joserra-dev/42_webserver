@@ -11,56 +11,49 @@
 /* ************************************************************************** */
 
 #include "ConfigParser.hpp"
-#include "Server.hpp"
-#include "Listener.hpp"
 #include <iostream>
 #include <stdexcept>
-#include <vector>
-#include <poll.h>
-#include <unistd.h>
-#include <sys/socket.h>
+#include <string>
 
 int main() {
-	try {
-		std::string filename;
-		std::cout << "Inserte el nombre del archivo *.conf:" << std::endl;
-		std::cin >> filename;
+    try {
+        std::string filename;
+        std::cout << "Inserte el nombre del archivo *.conf: ";
+        std::getline(std::cin, filename);
+        if (filename.empty()) {
+            throw std::runtime_error("Nombre de archivo vacío");
+        }
 
-		ConfigParser parser(filename);
-		parser.parse();
+        ConfigParser parser(filename);
+        parser.parse();
 
-		const std::vector<ServerConfig>& serverConfigs = parser.getServers();
-		std::vector<Server*> servers;
+        const std::vector<ServerConfig>& servers = parser.getServers();
+        for (size_t i = 0; i < servers.size(); ++i) {
+            std::cout << "Server #" << i << " listen: ";
+            for (size_t j = 0; j < servers[i].listen.size(); ++j)
+                std::cout << servers[i].listen[j] << " ";
+            std::cout << '\n';
 
-		for (size_t i = 0; i < serverConfigs.size(); ++i) {
-			Server* server = new Server(serverConfigs[i]);
-			servers.push_back(server);
-		}
+            std::cout << "Server #" << i << " server_names: ";
+            for (size_t j = 0; j < servers[i].serverNames.size(); ++j)
+                std::cout << servers[i].serverNames[j] << " ";
+            std::cout << '\n';
 
-		for (size_t i = 0; i < servers.size(); ++i) {
-			const std::vector<int>& sockets = servers[i]->getSockets();
-			std::cout << "Server #" << i << " socket abierto con el numero: ";
-			for (size_t j = 0; j < sockets.size(); ++j) {
-				std::cout << sockets[j] << " ";
-			}
-			std::cout << std::endl;
-		}
+            // Imprimir root como ruta completa (no caracteres)
+            std::cout << "Server #" << i << " root: " << servers[i].root << '\n';
 
-		std::cout << "Sockets inicializados correctamente. Servidores activos: "
-			      << servers.size() << std::endl;
+            // Imprimir índices (vector de strings)
+            std::cout << "Server #" << i << " index: ";
+            for (size_t l = 0; l < servers[i].index.size(); ++l)
+                std::cout << servers[i].index[l] << " ";
+            std::cout << '\n';
+        }
 
-		// Ejecutar loop de eventos con Listener
-		Listener listener(servers);
-		listener.run();
+        std::cout << "Config OK. Servidores encontrados: " << servers.size() << '\n';
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << '\n';
+        return 1;
+    }
 
-		// Liberar memoria
-		for (size_t i = 0; i < servers.size(); ++i) {
-			delete servers[i];
-		}
-	} catch (const std::exception& e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-		return 1;
-	}
-
-	return 0;
+    return 0;
 }
